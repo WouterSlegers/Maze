@@ -20,9 +20,11 @@ def distance_to_end(maze):
     searched = []
     to_search = [(0, 0)]
     shortest_distance = (maze.fields - 1) * 2
+    reached_fields = 0
 
     while len(to_search) > 0:
         x, y = to_search.pop(0)
+        reached_fields += 1
 
         distance = abs(x - maze.fields - 1) + abs(y - maze.fields - 1) #manhattan distance
         if distance < shortest_distance:
@@ -36,16 +38,20 @@ def distance_to_end(maze):
                 to_search.append(neighbour)
 
         searched.append((x, y))
-    return shortest_distance
 
-WEIGHT_DISTANCE = 3
-UNUSED_FIELDS_PENALTY = 1
+    unreached_fields = maze.fields**2 - reached_fields
+    return shortest_distance, unreached_fields
+
+WEIGHT_DISTANCE = 4
+WEIGHT_UNREACHED = 1
+UNUSED_FIELDS_PENALTY = 2
 
 def score_function(maze):
     sum = 0
 
-    distance = distance_to_end(maze)
+    distance, unreached_fields = distance_to_end(maze)
     sum -= distance * WEIGHT_DISTANCE
+    sum -= unreached_fields * WEIGHT_UNREACHED
 
     for x in range(maze.fields):
         for y in range(maze.fields):
@@ -55,7 +61,7 @@ def score_function(maze):
                 sum -= UNUSED_FIELDS_PENALTY
     return sum
 
-GENERATIONS = 15
+GENERATIONS = 30
 
 def create_maze_evolutionary(size, begin_density):
     instances = []
@@ -88,7 +94,7 @@ def create_maze_evolutionary(size, begin_density):
             high_scoring_maze = scored_instances[i][0]
             instances.append(high_scoring_maze)
             for j in range(14):
-                new_maze = high_scoring_maze.return_mutated(3, 6)
+                new_maze = high_scoring_maze.return_mutated(1, 6)
                 instances.append(new_maze)
 
         print(len(instances))
