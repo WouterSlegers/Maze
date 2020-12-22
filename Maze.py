@@ -96,6 +96,21 @@ class Maze:
                 for i in range(2):
                     self.connections[x][y][i] = (rng.random() > density)
 
+    def return_mutated(self, min, max):
+        number_of_mutations = rng.randrange(min, max + 1)
+        new_maze = Maze(self.fields)
+        new_maze.connections = np.copy(self.connections)
+
+        for dummy in range(number_of_mutations):
+            x = rng.randrange(0, self.fields)
+            y = rng.randrange(0, self.fields)
+            dir = rng.randrange(0, 2)
+            if new_maze.connections[x][y][dir]:
+                new_maze.connections[x][y][dir] = False
+            else:
+                new_maze.connections[x][y][dir] = True
+        return new_maze
+
     def get_connected_neighbours(self, x, y, connected):
         result = []
         if (self.field_on_board(x + 1, y) and self.connections[x][y][0] == connected):
