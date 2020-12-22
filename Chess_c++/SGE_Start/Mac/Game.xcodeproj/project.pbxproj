@@ -1,0 +1,233 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2708856F125636D70016A5F6 /* Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2708856E125636D70016A5F6 /* Test.cpp */; };
+		730903DA120221F000404DD6 /* Logic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 730903D9120221F000404DD6 /* Logic.cpp */; };
+		7381B4700EBCA20400EDCDDE /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7381B4420EBC9FC900EDCDDE /* GLUT.framework */; };
+		7381B4710EBCA20700EDCDDE /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7381B4410EBC9FBD00EDCDDE /* OpenGL.framework */; };
+		73B3DA6B11D755B300E045D1 /* GFX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73B3DA6211D755B300E045D1 /* GFX.cpp */; };
+		73B3DA6D11D755B300E045D1 /* GUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73B3DA6611D755B300E045D1 /* GUI.cpp */; };
+		73B3DA6E11D755B300E045D1 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73B3DA6811D755B300E045D1 /* Main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2708856E125636D70016A5F6 /* Test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Test.cpp; sourceTree = SOURCE_ROOT; };
+		274A5B6E122D544300B47869 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = SOURCE_ROOT; };
+		730903D8120221F000404DD6 /* Logic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logic.h; sourceTree = "<group>"; };
+		730903D9120221F000404DD6 /* Logic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Logic.cpp; sourceTree = "<group>"; };
+		7381B4410EBC9FBD00EDCDDE /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		7381B4420EBC9FC900EDCDDE /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+		7381B45D0EBCA12100EDCDDE /* X.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = X.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		73B3DA6211D755B300E045D1 /* GFX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GFX.cpp; sourceTree = "<group>"; };
+		73B3DA6311D755B300E045D1 /* GFX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFX.h; sourceTree = "<group>"; };
+		73B3DA6611D755B300E045D1 /* GUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUI.cpp; sourceTree = SOURCE_ROOT; };
+		73B3DA6711D755B300E045D1 /* GUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUI.h; sourceTree = SOURCE_ROOT; };
+		73B3DA6811D755B300E045D1 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7381B45B0EBCA12100EDCDDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7381B4710EBCA20700EDCDDE /* OpenGL.framework in Frameworks */,
+				7381B4700EBCA20400EDCDDE /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7381B4350EBC9FAA00EDCDDE = {
+			isa = PBXGroup;
+			children = (
+				2708856E125636D70016A5F6 /* Test.cpp */,
+				274A5B6E122D544300B47869 /* Common.h */,
+				73B3DA6211D755B300E045D1 /* GFX.cpp */,
+				73B3DA6311D755B300E045D1 /* GFX.h */,
+				73B3DA6611D755B300E045D1 /* GUI.cpp */,
+				73B3DA6711D755B300E045D1 /* GUI.h */,
+				730903D9120221F000404DD6 /* Logic.cpp */,
+				730903D8120221F000404DD6 /* Logic.h */,
+				73B3DA6811D755B300E045D1 /* Main.cpp */,
+				7381B4420EBC9FC900EDCDDE /* GLUT.framework */,
+				7381B4410EBC9FBD00EDCDDE /* OpenGL.framework */,
+				7381B45E0EBCA12100EDCDDE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7381B45E0EBCA12100EDCDDE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7381B45D0EBCA12100EDCDDE /* X.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7381B45C0EBCA12100EDCDDE /* X */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7381B4630EBCA12100EDCDDE /* Build configuration list for PBXNativeTarget "X" */;
+			buildPhases = (
+				7381B4590EBCA12100EDCDDE /* Resources */,
+				7381B45A0EBCA12100EDCDDE /* Sources */,
+				7381B45B0EBCA12100EDCDDE /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = X;
+			productName = X;
+			productReference = 7381B45D0EBCA12100EDCDDE /* X.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7381B4370EBC9FAA00EDCDDE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = 7381B43A0EBC9FAA00EDCDDE /* Build configuration list for PBXProject "Game" */;
+			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 7381B4350EBC9FAA00EDCDDE;
+			productRefGroup = 7381B45E0EBCA12100EDCDDE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7381B45C0EBCA12100EDCDDE /* X */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7381B4590EBCA12100EDCDDE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7381B45A0EBCA12100EDCDDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73B3DA6B11D755B300E045D1 /* GFX.cpp in Sources */,
+				73B3DA6D11D755B300E045D1 /* GUI.cpp in Sources */,
+				73B3DA6E11D755B300E045D1 /* Main.cpp in Sources */,
+				730903DA120221F000404DD6 /* Logic.cpp in Sources */,
+				2708856F125636D70016A5F6 /* Test.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		7381B4380EBC9FAA00EDCDDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		7381B4390EBC9FAA00EDCDDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Release;
+		};
+		7381B4610EBCA12100EDCDDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				INFOPLIST_FILE = "X-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = X;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		7381B4620EBCA12100EDCDDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				INFOPLIST_FILE = "X-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = X;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7381B43A0EBC9FAA00EDCDDE /* Build configuration list for PBXProject "Game" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7381B4380EBC9FAA00EDCDDE /* Debug */,
+				7381B4390EBC9FAA00EDCDDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7381B4630EBCA12100EDCDDE /* Build configuration list for PBXNativeTarget "X" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7381B4610EBCA12100EDCDDE /* Debug */,
+				7381B4620EBCA12100EDCDDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7381B4370EBC9FAA00EDCDDE /* Project object */;
+}

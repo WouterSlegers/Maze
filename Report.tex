@@ -1,0 +1,86 @@
+\documentclass[10pt, a4paper, twoside]{amsart}
+
+\usepackage[english]{babel}
+\usepackage{amsthm,amssymb,amsmath,graphicx}
+\usepackage{bbm}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\renewcommand{\a}{\alpha}
+\renewcommand{\d}{\delta}
+\newcommand{\p}{\partial}
+\newcommand{\e}{\epsilon}
+\newcommand{\w}{\omega}
+\renewcommand{\l}{\lambda}
+\newcommand{\vp}{\varphi}
+\newcommand{\vn}{\emptyset}
+\newcommand{\bs}{\backslash}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\F}{\mathcal{F}}
+\renewcommand{\P}{\mathcal{P}}
+\newcommand{\1}{\mathbbm{1}}
+\newcommand{\im}{\textup{im}}
+\renewcommand{\p}[2]{\frac{\partial #1}{\partial #2}}%partial
+\renewcommand{\a}[1]{\left\lvert #1 \right\rvert}%abs
+\renewcommand{\b}[1]{\left( #1 \right)}%brackets
+\newcommand{\n}[1]{\left\lVert #1 \right\rVert}%norm
+
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+
+\newcommand\textbox[1]{
+  \parbox{.333\textwidth}{#1}}
+
+\newcommand{\homeworkset}{}
+\newcommand{\courseName} {A3.6 Maze Generation}
+\newcommand{\firstName}  {Wouter}
+\newcommand{\lastName}   {Slegers}
+\newcommand{\studId}     {19950825-1957}
+\renewcommand{\email}    {wjslegers@gmail.com}
+
+\pagestyle{plain}
+\begin{document}
+\noindent{\huge\bf \courseName}\\
+\noindent\textbox{\sc \firstName~ \lastName \hfill}\textbox{\hfil Uppsala University \hfil}\textbox{\hfill \studId}
+\noindent\textbox{\large\sc Report \hfill}\textbox{\hfil \today \hfil}\textbox{\hfill \email}
+\bigskip
+
+
+\section*{Introduction}
+I have elected to do project A3.6 and make a maze generation algorithm. I came up with two different algorithms .
+Last one inspired by teaching AI to play a game, with some input of environment as input neural network. Fun project that I started doing with my brother work on project something that can learn to walk through mazes, where walls are traps.
+
+\subsection*{Practical information}
+To make writing code as easy as possible I chose Python, as I find it quick and easy to set things up. 
+You can find all the Python files in the zip-folder.
+I made a 'Maze' class and print it using the 'print()' function of Python to simplify the creating of the graphical part of the program. 
+
+
+\section{Path Through Maze Algorithm}
+The idea of the algorithm is to generate a random relatively dense maze. For example, for each wall there is a $70\%$ chance it becomes a wall and $30\%$ it is left open. Then we use a search algorithm that saves all the nodes it can reach from the starting node in a list called 'searched'. Every one of those nodes that is a dead end it also saves in a list called $'dead_ends'$, a dead end we define as a node with three or more walls around it. If we come across the end node we stop the algorithm. Otherwise we go through the dead ends until we find one that has a wall that leads to a previously unexplored node i.e. the neighbouring node is not in 'searched'. We remove the wall and the algorithm repeats itself, but starting from the node that we just connected to and we continue to use and add to the lists 'searched' and $'dead_ends'$ so that we don't have to do the same work many times. We, of course, remove the old dead end that we opened up from the list $'dead_ends'$.
+
+\subsection*{Notes on the algorithm}
+The choice of dead end to check first for 
+
+Notes: choice of dead end, neighbour 
+TODO: $rond lists$
+
+\subsection{Why it works}
+
+\section{Self-avoiding random walk}
+
+
+\subsection*{Notes on the algorithm}
+dont go euver 32, function calls!
+
+\subsection{Why it works}
+
+
+
+\end{document}

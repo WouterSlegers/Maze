@@ -1,0 +1,11 @@
+15/12/20 (4hrs):
+Checked code and how to modify
+Worked on drawing a maze on a chess board
+
+Added:
+GFX: 
+Modified drawScene
+Made drawMazeSquare
+
+Logic:
+MakeMaze (for now only randomizes the maze)

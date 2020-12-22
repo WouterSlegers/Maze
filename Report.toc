@@ -1,0 +1,3 @@
+\babel@toc {english}{}
+\contentsline {section}{\tocsection {}{}{Introduction}}{1}{section*.2}%
+\contentsline {section}{\tocsection {}{}{Path Through Maze Algorithm}}{1}{section*.3}%

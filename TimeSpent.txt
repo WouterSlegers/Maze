@@ -1,0 +1,10 @@
+15-12-20
+6 hours trying to make chess board into maze
+16-12-20
+4 hours setting up maze and board in python
+17-12-20
+7 hours setting up search for path algorithm
+creating algorithm using randomize + path created by dead ends
+cleaning up code + readability + consistency
+22-12-20
+4 hours creating walker
