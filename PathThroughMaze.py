@@ -40,14 +40,14 @@ def search_path_maze(maze, field):
     return False
 
 def create_maze_ptrm(size, begin_density, printing):
-
     maze = Maze.Maze(size)
     maze.randomize(begin_density)
+
 
     if(not path_through_maze(maze, (0, 0), printing)):
         print("something went wrong, expect a mess!")
     print("We're done!")
-    maze.print(True)
+    # maze.print(True)
     return maze
 
 def path_through_maze(maze, starting_point, printing):
@@ -55,10 +55,9 @@ def path_through_maze(maze, starting_point, printing):
         print("Searching from ", starting_point, " in the following maze")
         maze.print(True)
 
-    if(search_path_maze(maze, starting_point)): #we remember global variables searched and dead_ends
+    if(search_path_maze(maze, starting_point)):
         return True
 
-    # favouring points far from the diagonal between start (0, 0) and end (bottom right) creates more interesting and longer paths
     dead_ends.sort(reverse=True, key=lambda node: abs(node[0] - node[1]))
 
     for dead_end in dead_ends:
@@ -85,8 +84,7 @@ def path_through_maze(maze, starting_point, printing):
                 return path_through_maze(maze, neighbour, printing)
 
 
-
-maze = create_maze_ptrm(15, 0.6, True)
+maze = create_maze_ptrm(30, 0.7, False)
 maze.print(False)
 
 # #Replace
@@ -107,6 +105,3 @@ maze.print(False)
 # maze.connections[2][2][0] = True
 # maze.connections[2][2][1] = True
 # maze.connections[3][2][1] = True
-
-#When using terminal:
-# input("Press enter to exit ")

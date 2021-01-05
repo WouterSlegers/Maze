@@ -54,13 +54,6 @@ class Maze:
                 print(form.format(*row))
         print("")
 
-    # def print_connections(self):
-    #     form = "{} " * self.fields
-    #     for row in self.connections:
-    #         print(form.format(*row))
-    #         print()
-    #     print("")
-
     def insert(self, input, xco, yco):
         if self.board[yco][xco] != '=':
             self.board[yco][xco] = input
@@ -112,6 +105,9 @@ class Maze:
         return new_maze
 
     def get_connected_neighbours(self, x, y, connected):
+        """
+        Returns a list of coordinates of the connected/not connected neighbours of field (x,y) on the board
+        """
         result = []
         if (self.field_on_board(x + 1, y) and self.connections[x][y][0] == connected):
             result.append((x + 1, y))
@@ -124,6 +120,11 @@ class Maze:
         return result
 
     def list_neighbours(self, x, y, connected):
+        """
+        Returns a list of coordinates of the connected/not connected neighbours of field (x,y) on the board or None in its stead otherwise.
+        At the end we add the amount of not None neighbours.
+        """
+
         result = []
         possible_paths = 0
         if (self.field_on_board(x + 1, y) and self.connections[x][y][0] == connected):

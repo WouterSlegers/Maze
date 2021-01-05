@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.18)  22 DEC 2020 15:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.18)  5 JAN 2021 16:23
 entering extended mode
 **./Report.tex
 (Report.tex
@@ -393,43 +393,70 @@ Overfull \hbox (4.07639pt too wide) in paragraph at lines 49--53
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
+Underfull \hbox (badness 10000) in paragraph at lines 59--61
 
  []
 
-[1{C:/Users/weeti/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] (Report.aux)
+<nodeadends.jpg, id=43, 333.04425pt x 198.14024pt>
+File: nodeadends.jpg Graphic file (type jpg)
+<use nodeadends.jpg>
+Package pdftex.def Info: nodeadends.jpg  used on input line 76.
+(pdftex.def)             Requested size: 382.62692pt x 227.62204pt.
 
-Package rerunfilecheck Warning: File `Report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+Overfull \hbox (22.62692pt too wide) in paragraph at lines 76--77
+ [][] 
+ []
 
-Package rerunfilecheck Info: Checksums for `Report.out':
-(rerunfilecheck)             Before: BC2CFA24025F84360FBE0FC62DDFDABE;179
-(rerunfilecheck)             After:  15689CB4FE2BF501D54AEB2FCF669BB9;375.
+[1{C:/Users/weeti/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
+Overfull \hbox (2.24684pt too wide) in paragraph at lines 81--86
+[][]\OT1/cmtt/m/n/10 dead_ends.sort(reverse=True, key=lambda node: abs(node[0] 
+- node[1])) 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 88--89
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
+
+ []
+
+[2 <./nodeadends.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 92--94
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 105--106
+
+ []
+
+[3] (Report.aux)
+Package rerunfilecheck Info: File `Report.out' has not changed.
+(rerunfilecheck)             Checksum: 37811F8ABAF16B02F595012CCCC445BE;682.
  ) 
 Here is how much of TeX's memory you used:
- 7460 strings out of 479697
- 109881 string characters out of 2867132
- 422555 words of memory out of 3000000
- 24258 multiletter control sequences out of 15000+200000
- 410045 words of font info for 53 fonts, out of 3000000 for 9000
+ 7487 strings out of 479697
+ 110215 string characters out of 2867132
+ 426576 words of memory out of 3000000
+ 24276 multiletter control sequences out of 15000+200000
+ 410213 words of font info for 54 fonts, out of 3000000 for 9000
  1302 hyphenation exceptions out of 8191
- 79i,4n,85p,1001b,355s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{section*.3} has been referenced but does not exis
-t, replaced by a fixed one
-
-<C:/Users/weeti/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
-bx10.pfb><C:/Users/weeti/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
-nts/cm/cmbx12.pfb><C:/Users/weeti/AppData/Local/Programs/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmcsc10.pfb><C:/Users/weeti/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/weeti/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/weeti/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/weeti/AppData/Lo
-cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/weeti/App
-Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on Report.pdf (1 page, 96664 bytes).
+ 79i,5n,85p,1039b,380s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/weeti/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmbx10.pfb><C:/Users/weeti/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmbx12.pfb><C:/Users/weeti/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmcsc10.pfb><C:/Users/weeti/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/weeti/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/weeti/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/weeti/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/weeti/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on Report.pdf (3 pages, 150805 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
- 9 named destinations out of 1000 (max. 500000)
- 25 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 97 PDF objects out of 1000 (max. 8388607)
+ 15 named destinations out of 1000 (max. 500000)
+ 86 words of extra memory for PDF output out of 10000 (max. 10000000)
 

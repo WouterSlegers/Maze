@@ -7,7 +7,7 @@ import Maze
 x, y = 0, 0
 visited = []
 
-CHANCE_STRAIGHT = 0.3
+CHANCE_STRAIGHT = 0.3 #Additional chance to go straight.
 PRINTING_STEPS = True
 
 
@@ -62,10 +62,5 @@ def self_avoiding_walk(maze, starting_point, direction):
                 return self_avoiding_walk(maze, neighbour, -1)
 
 
-maze = create_maze_walker(32)
+maze = create_maze_walker(15)
 maze.print(False)
-
-
-
-#When using terminal:
-# input("Press enter to exit ")
