@@ -1,14 +1,10 @@
-"""
-Simple maze
-"""
 import random as rng
 import numpy as np
-
 
 class Maze:
     def __init__(self, fields):
         self.fields = fields
-        self.connections = np.full((self.fields, self.fields, 2), False) # If numpy crashes again, take from end of file instead
+        self.connections = np.full((self.fields, self.fields, 2), False)
 
         self.size = 1 + (self.fields - 1)*2
         self.board = []
@@ -40,7 +36,7 @@ class Maze:
         self.update_walls()
         form = "{} " * len(self.board)
         for row in self.board:
-            if not field_status: #whether we print the status of the fields
+            if not field_status: #whether we print the fields
                 alt += 1
                 if alt % 2 == 0:
                     temp_row = list(row)
@@ -61,7 +57,6 @@ class Maze:
     def field_on_board(self, x, y):
         return (x >= 0 and x <= self.fields - 1 and
                     y >= 0 and y <= self.fields - 1)
-
 
     def field_to_board_coords(self, x, y):
         return (1 + 2*x, 1 + 2*y)
@@ -106,7 +101,7 @@ class Maze:
 
     def get_connected_neighbours(self, x, y, connected):
         """
-        Returns a list of coordinates of the connected/not connected neighbours of field (x,y) on the board
+        Returns a list of coordinates of the connected neighbours of field (x,y) on the board if connected = True. Returns unconnected neighbours otherwise.
         """
         result = []
         if (self.field_on_board(x + 1, y) and self.connections[x][y][0] == connected):
@@ -121,8 +116,8 @@ class Maze:
 
     def list_neighbours(self, x, y, connected):
         """
-        Returns a list of coordinates of the connected/not connected neighbours of field (x,y) on the board or None in its stead otherwise.
-        At the end we add the amount of not None neighbours.
+        Returns a list of coordinates of the connected neighbours of field (x,y) on the board or None in its stead otherwise.
+        At the end we also add the amount of not None neighbours.
         """
 
         result = []
@@ -188,19 +183,3 @@ class Maze:
                                 self.board[index_y][index_x] = '|'
                         else:
                             self.board[index_y][index_x] = ' '
-
-
-
-
-# Set fields to 10 and self.connections as below
-# self.connections = [
-#                     [[False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False]],
-#                     [[False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False]],
-#                     [[False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False]],
-#                     [[False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False]],
-#                     [[False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False]],
-#                     [[False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False]],
-#                     [[False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False]],
-#                     [[False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False]],
-#                     [[False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False]],
-#                     [[False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False], [False, False]]]

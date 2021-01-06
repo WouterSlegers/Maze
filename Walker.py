@@ -7,8 +7,10 @@ import Maze
 x, y = 0, 0
 visited = []
 
-CHANCE_STRAIGHT = 0.3 #Additional chance to go straight.
 PRINTING_STEPS = True
+
+SIZE_MAZE = 20
+CHANCE_STRAIGHT = 0.1 #Additional chance to go straight.
 
 
 def create_maze_walker(size):
@@ -30,7 +32,7 @@ def self_avoiding_walk(maze, starting_point, direction):
     if len(visited) >= maze.fields**2:
         return True
 
-    neighbours, possible_paths = maze.list_neighbours(*starting_point, False) #neighbours[i] is None if neighbour in direction i is off the board or already connected
+    neighbours, possible_paths = maze.list_neighbours(*starting_point, False)
 
     if possible_paths > 0:
         if direction >= 0:
@@ -61,6 +63,8 @@ def self_avoiding_walk(maze, starting_point, direction):
                 maze.connect_neighbours(*node, *neighbour)
                 return self_avoiding_walk(maze, neighbour, -1)
 
-
-maze = create_maze_walker(15)
-maze.print(False)
+#-------------------------------------------------------------------------------
+if __name__ == "__main__":
+    maze = create_maze_walker(SIZE_MAZE)
+    print("The resulting maze:\n")
+    maze.print(False)

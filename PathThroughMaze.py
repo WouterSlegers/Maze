@@ -3,18 +3,17 @@ import numpy as np
 import time
 import Maze
 
-#Different from depth-first-search since it doesn't explore one branch before going to the next, rather takes random from entire list of dead ends.
-
 x, y = 0, 0
 searched = []
 to_search = []
 dead_ends = []
 
+PRINTING_STEPS = True
+
+SIZE_MAZE = 15
+BEGINNING_DENSITY = 0.7
+
 def search_path_maze(maze, field):
-    """
-    Searches for path from field to bottom right
-    Saves dead ends and searched nodes
-    """
     to_search.append(field)
     while len(to_search) > 0:
         x, y = to_search.pop(0)
@@ -39,19 +38,17 @@ def search_path_maze(maze, field):
             maze.set_field(x, y, 's')
     return False
 
-def create_maze_ptrm(size, begin_density, printing):
+def create_maze_ptrm(size, begin_density):
     maze = Maze.Maze(size)
     maze.randomize(begin_density)
 
-
-    if(not path_through_maze(maze, (0, 0), printing)):
+    if(not path_through_maze(maze, (0, 0))):
         print("something went wrong, expect a mess!")
     print("We're done!")
-    # maze.print(True)
     return maze
 
-def path_through_maze(maze, starting_point, printing):
-    if printing:
+def path_through_maze(maze, starting_point):
+    if PRINTING_STEPS:
         print("Searching from ", starting_point, " in the following maze")
         maze.print(True)
 
@@ -71,9 +68,9 @@ def path_through_maze(maze, starting_point, printing):
                 maze.connect_neighbours(*dead_end, *neighbour)
                 maze.set_field(x, y, 'O')
                 dead_ends.pop(index)
-                return path_through_maze(maze, neighbour, printing)
+                return path_through_maze(maze, neighbour)
 
-    #If no suitable dead ends, but we did not finish: we found a block, happens rarely!
+    #If there are no suitable dead ends, should not happen often:
     rng.shuffle(searched)
     for (x, y) in searched:
         disconnected_neighbours = maze.get_connected_neighbours(x, y, False)
@@ -81,17 +78,20 @@ def path_through_maze(maze, starting_point, printing):
             if neighbour not in searched:
                 maze.connect_neighbours(x, y, *neighbour)
                 maze.set_field(x, y, 'O')
-                return path_through_maze(maze, neighbour, printing)
+                return path_through_maze(maze, neighbour)
 
 
-maze = create_maze_ptrm(30, 0.7, False)
-maze.print(False)
+#-------------------------------------------------------------------------------
+if __name__ == "__main__":
+    maze = create_maze_ptrm(SIZE_MAZE, BEGINNING_DENSITY)
+    print("The resulting maze:\n")
+    maze.print(False)
 
-# #Replace
+# Replacing
 # maze.randomize(begin_density)
 # in create_maze_ptrm
 # with the row of maze.connections that follow
-# to test a case when the algorithm encounters a situation with no suitable dead ends.
+# gives the situation without suitable dead ends described in the report
 # maze.connections[0][0][1] = True
 # maze.connections[0][1][0] = True
 # maze.connections[1][1][0] = True

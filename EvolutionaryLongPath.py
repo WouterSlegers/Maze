@@ -2,73 +2,68 @@ import random as rng
 import numpy as np
 import Maze
 
-
 x, y = 0, 0
 PRINTING_GENERATIONS = True
 PRINT_INTERVAL = 5
 
-# Weights for the scoring function.
-WEIGHT_DISTANCE = 4
+# Weights for the scoring function
+PENALTY_NO_PATH = 10
 WEIGHT_UNREACHED = 1
+WEIGHT_DISTANCE_PATH = 1
 WEIGHT_WALLS = 0.05
 
-SIZE_MAZE = 16
+SIZE_MAZE = 12
 
 # Evolutional parameters
-STARTING_AMOUNT = 80               #starting amount of randomized mazes
+STARTING_AMOUNT = 80                #starting amount of randomized mazes
 BEGINNING_DENSITY = 0.7
-NUMBER_TO_NEXT_GENERATION = 8      #number of the best performing mazes taken to the next generation
-NUMBER_OF_CHILDREN = 6             #each maze taken to the new generation makes this amount of mutated children
+NUMBER_TO_NEXT_GENERATION = 8       #number of the best performing mazes taken to the next generation
+NUMBER_OF_CHILDREN = 10             #each maze taken to the new generation makes this amount of mutated children
 MIN_MUTATIONS = 1                   #each child gets between MIN_MUTATIONS and MAX_MUTATIONS amount of mutations compared to the parent
 MAX_MUTATIONS = 8
 
 GENERATIONS = 40
 
+def shortest_path(maze, distance_to_fields, x, y, length):
+    distance_to_fields[x][y] = length
 
-def distance_to_end(maze):
-    searched = []
-    to_search = [(0, 0)]
-    shortest_distance = (maze.fields - 1) * 2
-    reached_fields = 0
+    connected_neighbours = maze.get_connected_neighbours(x, y, True)
 
-    while len(to_search) > 0:
-        x, y = to_search.pop(0)
-        reached_fields += 1
+    for neighbour in connected_neighbours:
+        if distance_to_fields[neighbour[0]][neighbour[1]] > length + 1:
+            shortest_path(maze, distance_to_fields, *neighbour, length + 1)
 
-        distance = abs(x - (maze.fields - 1)) + abs(y - (maze.fields - 1)) #manhattan distance
-        if distance < shortest_distance:
-            shortest_distance = distance
 
-        connected_neighbours = maze.get_connected_neighbours(x, y, True)
-        for neighbour in connected_neighbours:
-            if(neighbour not in searched and neighbour not in to_search):
-                to_search.append(neighbour)
-
-        searched.append((x, y))
-
-    unreached_fields = maze.fields**2 - reached_fields
-    return shortest_distance, unreached_fields
-
-def score_function(maze):
+def score_function(maze, distance_to_fields):
     sum = 0
 
-    distance, unreached_fields = distance_to_end(maze)
-    sum -= distance * WEIGHT_DISTANCE
-    sum -= unreached_fields * WEIGHT_UNREACHED
+    for x in range(maze.fields):
+        for y in range(maze.fields):
+            distance_to_node = distance_to_fields[x][y]
+            if distance_to_node == maze.fields**2 + 1:
+                sum -= WEIGHT_UNREACHED
+
+    distance_to_end = distance_to_fields[maze.fields - 1][maze.fields - 1]
+    if distance_to_end == maze.fields**2 + 1:
+        sum -= PENALTY_NO_PATH
+    else:
+        sum += distance_to_end * WEIGHT_DISTANCE_PATH
 
     for x in range(maze.fields):
         for y in range(maze.fields):
             for i in range(2):
                 if maze.connections[x][y][i] == False:
                     sum += WEIGHT_WALLS
+
     return sum
 
 
 def create_maze_evolutionary(size, begin_density):
     instances = []
     maze = Maze.Maze(size)
+    distance_to_fields_cache = np.full((maze.fields, maze.fields), maze.fields**2 + 1)
 
-    for dummy in range(150):
+    for dummy in range(STARTING_AMOUNT):
         maze = Maze.Maze(size)
         maze.randomize(begin_density)
         instances.append(maze)
@@ -78,16 +73,16 @@ def create_maze_evolutionary(size, begin_density):
     for generation in range(GENERATIONS):
         scored_instances = []
         for maze in instances:
-            if maze == None:
-                raise
-            scored_instances.append((maze, score_function(maze)))
+            distance_to_fields_cache.fill(maze.fields**2 + 1)
+            shortest_path(maze, distance_to_fields_cache, 0, 0, 0)
+            scored_instances.append((maze, score_function(maze, distance_to_fields_cache)))
 
         scored_instances.sort(key = lambda pair: pair[1], reverse = True)
 
+
         if PRINTING_GENERATIONS and generation % PRINT_INTERVAL == 0 :
             current_maze, score = scored_instances[0]
-            print("".format(*distance_to_end(current_maze)))
-            print("Best maze of generation {} with \n distance to end: {}, unreached fields: {} and \nscore {}".format(generation, *distance_to_end(current_maze), score))
+            print(f"Best maze of generation {generation} with score\n {score}:")
             current_maze.print(False)
 
         instances = []
