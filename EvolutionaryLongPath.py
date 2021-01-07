@@ -1,16 +1,17 @@
 import random as rng
 import numpy as np
 import Maze
+import concurrent.futures as future
 
 x, y = 0, 0
 
 SIZE_MAZE = 12
 
 PRINTING_GENERATIONS = True
-PRINT_INTERVAL = 50
+PRINT_INTERVAL = 5
 
 # Evolutional parameters
-GENERATIONS = 500
+GENERATIONS = 50
 STARTING_AMOUNT = 120               #starting amount of randomized mazes
 BEGINNING_DENSITY = 0.7             #density of the randomly initialized mazes
 NUMBER_TO_NEXT_GENERATION = 12      #number of the best performing mazes taken to the next generation
@@ -19,14 +20,14 @@ MIN_MUTATIONS = 1                   #each child gets between MIN_MUTATIONS and M
 MAX_MUTATIONS = 8
 
 # Weights for the scoring function
-PENALTY_NO_PATH = 10
+PENALTY_NO_PATH = 5                 #gets multiplied by shortest manhattan distance to end node
 WEIGHT_UNREACHED = 1
-WEIGHT_DISTANCE_PATH = 1
+WEIGHT_DISTANCE_PATH = 1.5
 WEIGHT_WALLS = 0.1
+
 
 def shortest_path(maze, distance_to_fields, x, y, length):
     distance_to_fields[x][y] = length
-
     connected_neighbours = maze.get_connected_neighbours(x, y, True)
 
     for neighbour in connected_neighbours:
@@ -43,9 +44,19 @@ def score_function(maze, distance_to_fields):
             if distance_to_node == maze.fields**2 + 1:
                 sum -= WEIGHT_UNREACHED
 
+
     distance_to_end = distance_to_fields[maze.fields - 1][maze.fields - 1]
-    if distance_to_end == maze.fields**2 + 1:
-        sum -= PENALTY_NO_PATH
+    if distance_to_end == maze.fields**2 + 1: #no path to end
+        shortest_manhattan_distance_to_end = maze.fields*2
+        for x in range(maze.fields):
+            for y in range(maze.fields):
+                if distance_to_fields[maze.fields - 1][maze.fields - 1] < maze.fields**2 + 1:
+                    manhattan_distance_to_end = abs(x - (maze.fields - 1)) + abs(y - (maze.fields - 1)) #manhattan distance
+                    if manhattan_distance_to_end < shortest_manhattan_distance_to_end:
+                        shortest_manhattan_distance_to_end = manhattan_distance_to_end
+
+        sum -= shortest_manhattan_distance_to_end * PENALTY_NO_PATH
+
     else:
         sum += distance_to_end * WEIGHT_DISTANCE_PATH
 
@@ -57,11 +68,14 @@ def score_function(maze, distance_to_fields):
 
     return sum
 
+def evaluate_maze(maze):
+    distance_to_fields = np.full((maze.fields, maze.fields), maze.fields**2 + 1)
+    shortest_path(maze, distance_to_fields, 0, 0, 0)
+    return (maze, score_function(maze, distance_to_fields))
 
 def create_maze_evolutionary(size, begin_density):
     instances = []
     maze = Maze.Maze(size)
-    distance_to_fields_cache = np.full((maze.fields, maze.fields), maze.fields**2 + 1)
 
     for dummy in range(STARTING_AMOUNT):
         maze = Maze.Maze(size)
@@ -70,28 +84,26 @@ def create_maze_evolutionary(size, begin_density):
 
     scored_instances = []
 
-    for generation in range(GENERATIONS):
-        scored_instances = []
-        for maze in instances:
-            distance_to_fields_cache.fill(maze.fields**2 + 1)
-            shortest_path(maze, distance_to_fields_cache, 0, 0, 0)
-            scored_instances.append((maze, score_function(maze, distance_to_fields_cache)))
+    with future.ProcessPoolExecutor() as executor:
+        for generation in range(GENERATIONS):
+            scored_instances = []
 
-        scored_instances.sort(key = lambda pair: pair[1], reverse = True)
+            scored_instances = list(executor.map(evaluate_maze, instances))
+            scored_instances.sort(key = lambda pair: pair[1], reverse = True)
 
 
-        if PRINTING_GENERATIONS and generation % PRINT_INTERVAL == 0 :
-            current_maze, score = scored_instances[0]
-            print(f"Best maze of generation {generation} with score\n {score}:")
-            current_maze.print(False)
+            if PRINTING_GENERATIONS and generation % PRINT_INTERVAL == 0 :
+                current_maze, score = scored_instances[0]
+                print(f"Best maze of generation {generation} with score\n {score}:")
+                current_maze.print(False)
 
-        instances = []
-        for i in range(NUMBER_TO_NEXT_GENERATION):
-            high_scoring_maze = scored_instances[i][0]
-            instances.append(high_scoring_maze)
-            for j in range(NUMBER_OF_CHILDREN):
-                new_maze = high_scoring_maze.return_mutated(MIN_MUTATIONS, MAX_MUTATIONS)
-                instances.append(new_maze)
+            instances = []
+            for i in range(NUMBER_TO_NEXT_GENERATION):
+                high_scoring_maze = scored_instances[i][0]
+                instances.append(high_scoring_maze)
+                for j in range(NUMBER_OF_CHILDREN):
+                    new_maze = high_scoring_maze.return_mutated(MIN_MUTATIONS, MAX_MUTATIONS)
+                    instances.append(new_maze)
 
     return scored_instances[0][0]
 

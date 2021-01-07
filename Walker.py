@@ -7,9 +7,9 @@ import Maze
 x, y = 0, 0
 visited = []
 
-PRINTING_STEPS = True
+PRINTING_STEPS = False
 
-SIZE_MAZE = 10
+SIZE_MAZE = 80
 
 
 def create_maze_walker(size):

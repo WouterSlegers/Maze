@@ -8,19 +8,16 @@ searched = []
 to_search = []
 dead_ends = []
 
-PRINTING_STEPS = False
+PRINTING_STEPS = True
 
-SIZE_MAZE = 30
-BEGINNING_DENSITY = 1
+SIZE_MAZE = 12
+BEGINNING_DENSITY = 0.7
 
 def search_path_maze(maze, field):
     to_search.append(field)
     while len(to_search) > 0:
         x, y = to_search.pop(0)
         maze.set_field(x, y, 'c')
-
-        # if(x == maze.fields - 1 and y == maze.fields - 1):
-        #     return True
 
         connected_neighbours = maze.get_connected_neighbours(x, y, True)
         for new_node in connected_neighbours:

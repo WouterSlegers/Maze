@@ -118,12 +118,24 @@ Furthermore there is no guarantee that the algorithm finishes with a maze that h
 
 \subsection{Notes on the algorithm}
 I made two versions, \verb+Evolutionary.py+ and\\ \verb+EvolutionaryLongPath.py+.
-The first uses a scoring function that creates a list of nodes that can be reached from the beginning node, using the \verb+distance_to_end+ function. If none of the reachable nodes are close to the end the score will be low. Also a high number of nodes that can not be reached decreases the score. To prevent making the maze too sparse the score is increased slightly for each wall it has. The downside of this method is that the maze it produces often has a rather short path to the end.
-The other version, \verb+EvolutionaryLongPath.py+, is meant to prevent that. Here, in the scoring function, we use a search function \verb+shortest_path+ that keeps track of shortest distance from the start node to each node in the maze. This way we can also punish for nodes that can not be reached and reward for reaching the last node. But now we can also give higher scores to mazes that have a long path to the end instead of a short one! This creates, what I consider to be, more interesting mazes. Again we give a slightly higher score for mazes with more walls.\\
-Once a maze is found that reaches the end, the large majority of the mutated children are worse mazes, and the progress becomes very slow. So to fully utilise this and give it more time to create a longer path we can use more generations.
+The first uses a scoring function that creates a list of nodes that can be reached from the beginning node, using the \verb+distance_to_end+ function. For each of the reachable nodes we calculate the manhattan-distance to the end node and subtract the shortest such distance from the score, to encourage making a path to the end. Also a high number of nodes that can not be reached decreases the score. To prevent making the maze too sparse the score is increased slightly for each wall it has. The downside of this method is that the maze it produces often has a rather short path to the end.\\
 
-The second version uses a recursive search algorithm that could potentially go through every node and even the same node multiple times if it finds a shorter path there. So for mazes larger than $30$ by $30$ there is potential for recursive call depth errors, however this type of algorithm is unsuitable for large mazes anyway since it would take a lot of generations to find a good maze. The latter algorithm in particular is unsuitable for large mazes since the score does not account for being closer to making a path to the end like the first version does.
-In testing both versions tend to create decent mazes of size $12$ by $12$ in as few as $30$ generations, with $80$ mazes in each generation. 
+The other version, \verb+EvolutionaryLongPath.py+, is meant to prevent that. Here, in the scoring function, we use a search function \verb+shortest_path+ that keeps track of shortest distance from the start node to each node in the maze. This way we can also punish for nodes that can not be reached and reward for reaching the last node. But now we can also give higher scores to mazes that have a long path to the end instead of a short one! This creates, what I consider to be, more interesting mazes. Again we give a slightly higher score for mazes with more walls.\\
+
+Once a maze is found that reaches the end, the large majority of the mutated children are worse mazes, and the progress becomes very slow. So to fully utilise this and give it more time to create a longer path we can use more generations.\\
+
+The second version uses a recursive search algorithm that could potentially go through every node in the maze and even the same node multiple times if it finds a shorter path there. So for mazes larger than $30$ by $30$ there is potential for recursion call depth errors, however this type of algorithm is unsuitable for large mazes anyway since it would take a lot of generations to find a good maze. The latter algorithm in particular is unsuitable for large mazes since the maze is not scored higher when it is closer to making a path from beginning to end, only when it does.\\
+
+In testing both versions tend to create decent mazes of size $12$ by $12$ in as few as $30$ generations, with $120$ mazes in each generation.\\
+
+For the second version, despite it being more taxing on memory, I decided to use multi-processing so I could more quickly experiment with higher numbers of generations. In the figure below for example is a maze of $12$ by $12$ after $1000$ generations (so you don't have to). The best maze of the generation did not change after generation $600$ with improvements becoming too unlikely.
+
+\begin{figure}
+\centering
+        \includegraphics[totalheight=8cm]{evolutional.jpg}
+    \caption{The resulting maze from 1000 generations of mazes, each consisting of 120 mazes}
+\end{figure}
+
 
 
 \end{document}
