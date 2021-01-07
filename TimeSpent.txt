@@ -8,3 +8,9 @@ creating algorithm using randomize + path created by dead ends
 cleaning up code + readability + consistency
 22-12-20
 4 hours creating walker
+05-01-21
+4-5 hours working on report and improving code
+06-01-21
+4-5 hours creating EvolutionaryLongPath.py and adding to report
+07-01-21
+4-5 hours finishing up algorithms, improving PTM to always search everything and adapting and finishing up report

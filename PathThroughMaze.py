@@ -8,10 +8,10 @@ searched = []
 to_search = []
 dead_ends = []
 
-PRINTING_STEPS = True
+PRINTING_STEPS = False
 
-SIZE_MAZE = 15
-BEGINNING_DENSITY = 0.7
+SIZE_MAZE = 30
+BEGINNING_DENSITY = 1
 
 def search_path_maze(maze, field):
     to_search.append(field)
@@ -19,9 +19,8 @@ def search_path_maze(maze, field):
         x, y = to_search.pop(0)
         maze.set_field(x, y, 'c')
 
-        if(x == maze.fields - 1 and y == maze.fields - 1):
-            print("Path found!")
-            return True
+        # if(x == maze.fields - 1 and y == maze.fields - 1):
+        #     return True
 
         connected_neighbours = maze.get_connected_neighbours(x, y, True)
         for new_node in connected_neighbours:
@@ -52,7 +51,8 @@ def path_through_maze(maze, starting_point):
         print("Searching from ", starting_point, " in the following maze")
         maze.print(True)
 
-    if(search_path_maze(maze, starting_point)):
+    search_path_maze(maze, starting_point)
+    if len(searched) >= maze.fields**2:
         return True
 
     dead_ends.sort(reverse=True, key=lambda node: abs(node[0] - node[1]))
@@ -70,7 +70,7 @@ def path_through_maze(maze, starting_point):
                 dead_ends.pop(index)
                 return path_through_maze(maze, neighbour)
 
-    #If there are no suitable dead ends, should not happen often:
+    #If there are no suitable dead ends:
     rng.shuffle(searched)
     for (x, y) in searched:
         disconnected_neighbours = maze.get_connected_neighbours(x, y, False)

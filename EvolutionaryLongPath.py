@@ -3,26 +3,26 @@ import numpy as np
 import Maze
 
 x, y = 0, 0
+
+SIZE_MAZE = 12
+
 PRINTING_GENERATIONS = True
-PRINT_INTERVAL = 5
+PRINT_INTERVAL = 50
+
+# Evolutional parameters
+GENERATIONS = 500
+STARTING_AMOUNT = 120               #starting amount of randomized mazes
+BEGINNING_DENSITY = 0.7             #density of the randomly initialized mazes
+NUMBER_TO_NEXT_GENERATION = 12      #number of the best performing mazes taken to the next generation
+NUMBER_OF_CHILDREN = 10             #each maze taken to the new generation makes this amount of mutated children
+MIN_MUTATIONS = 1                   #each child gets between MIN_MUTATIONS and MAX_MUTATIONS amount of mutations compared to the parent
+MAX_MUTATIONS = 8
 
 # Weights for the scoring function
 PENALTY_NO_PATH = 10
 WEIGHT_UNREACHED = 1
 WEIGHT_DISTANCE_PATH = 1
-WEIGHT_WALLS = 0.05
-
-SIZE_MAZE = 12
-
-# Evolutional parameters
-STARTING_AMOUNT = 80                #starting amount of randomized mazes
-BEGINNING_DENSITY = 0.7
-NUMBER_TO_NEXT_GENERATION = 8       #number of the best performing mazes taken to the next generation
-NUMBER_OF_CHILDREN = 10             #each maze taken to the new generation makes this amount of mutated children
-MIN_MUTATIONS = 1                   #each child gets between MIN_MUTATIONS and MAX_MUTATIONS amount of mutations compared to the parent
-MAX_MUTATIONS = 8
-
-GENERATIONS = 40
+WEIGHT_WALLS = 0.1
 
 def shortest_path(maze, distance_to_fields, x, y, length):
     distance_to_fields[x][y] = length
