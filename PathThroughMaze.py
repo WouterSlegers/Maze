@@ -7,11 +7,12 @@ x, y = 0, 0
 searched = []
 to_search = []
 dead_ends = []
+steps = 0
 
 PRINTING_STEPS = True
 
-SIZE_MAZE = 12
-BEGINNING_DENSITY = 0.7
+SIZE_MAZE = 14
+BEGINNING_DENSITY = 0.8
 
 def search_path_maze(maze, field):
     to_search.append(field)
@@ -22,7 +23,6 @@ def search_path_maze(maze, field):
         connected_neighbours = maze.get_connected_neighbours(x, y, True)
         for new_node in connected_neighbours:
             if(new_node not in searched and new_node not in to_search):
-                maze.set_field(*new_node, 't')
                 to_search.append(new_node)
 
         searched.append((x, y))
@@ -38,9 +38,8 @@ def create_maze_ptrm(size, begin_density):
     maze = Maze.Maze(size)
     maze.randomize(begin_density)
 
-    if(not path_through_maze(maze, (0, 0))):
-        print("something went wrong, expect a mess!")
-    print("We're done!")
+    steps = path_through_maze(maze, (0, 0))
+    print(f"We're done after {steps} steps!")
     return maze
 
 def path_through_maze(maze, starting_point):
@@ -50,7 +49,7 @@ def path_through_maze(maze, starting_point):
 
     search_path_maze(maze, starting_point)
     if len(searched) >= maze.fields**2:
-        return True
+        return 0
 
     dead_ends.sort(reverse=True, key=lambda node: abs(node[0] - node[1]))
 
@@ -65,7 +64,7 @@ def path_through_maze(maze, starting_point):
                 maze.connect_neighbours(*dead_end, *neighbour)
                 maze.set_field(x, y, 'O')
                 dead_ends.pop(index)
-                return path_through_maze(maze, neighbour)
+                return 1 + path_through_maze(maze, neighbour)
 
     #If there are no suitable dead ends:
     rng.shuffle(searched)
@@ -75,9 +74,10 @@ def path_through_maze(maze, starting_point):
             if neighbour not in searched:
                 maze.connect_neighbours(x, y, *neighbour)
                 maze.set_field(x, y, 'O')
-                return path_through_maze(maze, neighbour)
+                return 1 + path_through_maze(maze, neighbour)
 
-
+def return_steps():
+    return steps
 #-------------------------------------------------------------------------------
 if __name__ == "__main__":
     maze = create_maze_ptrm(SIZE_MAZE, BEGINNING_DENSITY)

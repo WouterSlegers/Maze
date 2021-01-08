@@ -77,8 +77,6 @@ def create_maze_evolutionary(size, begin_density):
     for generation in range(GENERATIONS):
         scored_instances = []
         for maze in instances:
-            if maze == None:
-                raise
             scored_instances.append((maze, score_function(maze)))
 
         scored_instances.sort(key = lambda pair: pair[1], reverse = True)

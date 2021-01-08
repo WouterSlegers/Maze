@@ -30,6 +30,22 @@ class Maze:
             self.board.append(list(row))
         self.board.append(outer_row)
 
+    def __eq__(self, other_maze):
+        if other_maze == None or self.fields != other_maze.fields:
+            return False
+        for x in range(self.fields):
+            for y in range(self.fields):
+                for i in range(2):
+                    if self.connections[x][y][i] != other_maze.connections[x][y][i]:
+                        if not (x == self.fields and i == 0) and not (y == self.fields and i == 1):
+                            return False
+        return True
+
+    def return_copy(self):
+        new_maze = Maze(self.fields)
+        new_maze.connections = np.copy(self.connections)
+        return new_maze
+
     def print(self, field_status):
         alt = 0
         temp_row = []
@@ -86,17 +102,29 @@ class Maze:
 
     def return_mutated(self, min, max):
         number_of_mutations = rng.randrange(min, max + 1)
-        new_maze = Maze(self.fields)
-        new_maze.connections = np.copy(self.connections)
+        new_maze = self.return_copy()
 
         for dummy in range(number_of_mutations):
             x = rng.randrange(0, self.fields)
             y = rng.randrange(0, self.fields)
             dir = rng.randrange(0, 2)
-            if new_maze.connections[x][y][dir]:
-                new_maze.connections[x][y][dir] = False
-            else:
-                new_maze.connections[x][y][dir] = True
+            new_maze.connections[x][y][dir] = not new_maze.connections[x][y][dir]
+        return new_maze
+
+    def return_regionally_mutated(self, min, max):
+        number_of_mutations = rng.randrange(min, max + 1)
+        new_maze = self.return_copy()
+
+        x = rng.randrange(0, self.fields)
+        y = rng.randrange(0, self.fields)
+
+        while number_of_mutations > 0:
+            dx = rng.randrange(-3, 3)
+            dy = rng.randrange(-3, 3)
+            dir = rng.randrange(0, 2)
+            if self.field_on_board(x + dx, y + dy):
+                new_maze.connections[x + dx][y + dy][dir] = not new_maze.connections[x + dx][y + dy][dir]
+                number_of_mutations -= 1
         return new_maze
 
     def get_connected_neighbours(self, x, y, connected):
@@ -116,8 +144,8 @@ class Maze:
 
     def list_neighbours(self, x, y, connected):
         """
-        Returns a list of coordinates of the connected neighbours of field (x,y) on the board or None in its stead otherwise.
-        At the end we also add the amount of not None neighbours.
+        Similar to get_connected_neighbours but always returns 5 values, 4 neighbours (can be None)
+        and the amount of connected neighbours
         """
 
         result = []
@@ -156,7 +184,7 @@ class Maze:
 
     def update_walls(self):
         """
-        Updates all the walls in board according to connections
+        Updates all the walls in self.board according to self.connections
         """
         for index_x, row in enumerate(self.board):
             for index_y, col in enumerate(row):

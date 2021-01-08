@@ -14,3 +14,6 @@ cleaning up code + readability + consistency
 4-5 hours creating EvolutionaryLongPath.py and adding to report
 07-01-21
 4-5 hours finishing up algorithms, improving PTM to always search everything and adapting and finishing up report
+2 hours doing more stuff
+08-01-21
+4 hours using ptm on EvolutionaryLongPath and calculating steps. More finetuning and finishing up + report work!

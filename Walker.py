@@ -7,15 +7,15 @@ import Maze
 x, y = 0, 0
 visited = []
 
-PRINTING_STEPS = False
+PRINTING_STEPS = True
 
-SIZE_MAZE = 80
+SIZE_MAZE = 15
 
 
 def create_maze_walker(size):
     maze = Maze.Maze(size)
-    if (not self_avoiding_walk(maze, (0, 0))):
-        print("Something may have gone wrong...")
+    steps = self_avoiding_walk(maze, (0, 0))
+    print(f"We're done after {steps} random walks!")
     return maze
 
 def self_avoiding_walk(maze, starting_point):
@@ -24,7 +24,6 @@ def self_avoiding_walk(maze, starting_point):
     if PRINTING_STEPS:
         for node in visited:
             maze.set_field(*node, 'v')
-
 
     while current_node:
         visited.append(current_node)
@@ -50,7 +49,7 @@ def self_avoiding_walk(maze, starting_point):
         maze.print(True)
 
     if len(visited) >= maze.fields**2:
-        return True
+        return 0
 
     rng.shuffle(visited)
     for node in visited:
@@ -58,9 +57,7 @@ def self_avoiding_walk(maze, starting_point):
         for neighbour in disconnected_neighbours:
             if neighbour not in visited:
                 maze.connect_neighbours(*node, *neighbour)
-                return self_avoiding_walk(maze, neighbour)
-
-    return False #Should never happen
+                return 1 + self_avoiding_walk(maze, neighbour)
 
 #-------------------------------------------------------------------------------
 if __name__ == "__main__":
