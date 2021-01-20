@@ -3,7 +3,6 @@ import numpy as np
 import time
 import Maze
 
-x, y = 0, 0
 searched = []
 to_search = []
 dead_ends = []
@@ -11,14 +10,22 @@ steps = 0
 
 PRINTING_STEPS = True
 
-SIZE_MAZE = 14
-BEGINNING_DENSITY = 0.8
+SIZE_MAZE = 12
+BEGIN_DENSITY = 0.7
+
+def create_maze_ptrm(size, begin_density):
+    maze = Maze.Maze(size)
+    maze.randomize(begin_density)
+
+    steps = path_through_maze(maze, (0, 0))
+    print(f"We're done after {steps} steps!")
+    return maze
 
 def search_path_maze(maze, field):
+
     to_search.append(field)
     while len(to_search) > 0:
         x, y = to_search.pop(0)
-        maze.set_field(x, y, 'c')
 
         connected_neighbours = maze.get_connected_neighbours(x, y, True)
         for new_node in connected_neighbours:
@@ -32,15 +39,6 @@ def search_path_maze(maze, field):
             maze.set_field(x, y, 'd')
         else:
             maze.set_field(x, y, 's')
-    return False
-
-def create_maze_ptrm(size, begin_density):
-    maze = Maze.Maze(size)
-    maze.randomize(begin_density)
-
-    steps = path_through_maze(maze, (0, 0))
-    print(f"We're done after {steps} steps!")
-    return maze
 
 def path_through_maze(maze, starting_point):
     if PRINTING_STEPS:
@@ -76,13 +74,12 @@ def path_through_maze(maze, starting_point):
                 maze.set_field(x, y, 'O')
                 return 1 + path_through_maze(maze, neighbour)
 
-def return_steps():
-    return steps
 #-------------------------------------------------------------------------------
 if __name__ == "__main__":
-    maze = create_maze_ptrm(SIZE_MAZE, BEGINNING_DENSITY)
+    maze = create_maze_ptrm(SIZE_MAZE, BEGIN_DENSITY)
     print("The resulting maze:\n")
     maze.print(False)
+    input("Press any button to quit.")
 
 # Replacing
 # maze.randomize(begin_density)

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.18)  8 JAN 2021 17:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.18)  11 JAN 2021 17:05
 entering extended mode
 **./Report.tex
 (Report.tex
@@ -397,7 +397,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 59--61
 
  []
 
-<nodeadends.jpg, id=51, 333.04425pt x 198.14024pt>
+<nodeadends.jpg, id=55, 333.04425pt x 198.14024pt>
 File: nodeadends.jpg Graphic file (type jpg)
 <use nodeadends.jpg>
 Package pdftex.def Info: nodeadends.jpg  used on input line 75.
@@ -419,17 +419,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 80--85
  []
 
 [1{C:/Users/weeti/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 90--91
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 93--94
 
  []
 
 [2 <./nodeadends.jpg>]
-<beginwalker.jpg, id=69, 517.33275pt x 314.97675pt>
+<beginwalker.jpg, id=72, 517.33275pt x 314.97675pt>
 File: beginwalker.jpg Graphic file (type jpg)
 <use beginwalker.jpg>
 Package pdftex.def Info: beginwalker.jpg  used on input line 102.
@@ -439,20 +434,29 @@ Overfull \hbox (13.86072pt too wide) in paragraph at lines 102--103
  [][] 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 108--109
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+
+ []
+
 [3 <./beginwalker.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 121--122
+Underfull \hbox (badness 10000) in paragraph at lines 119--120
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 123--124
+Underfull \hbox (badness 10000) in paragraph at lines 124--125
 
  []
 
 
-Overfull \hbox (23.15675pt too wide) in paragraph at lines 126--127
-\OT1/cmr/m/n/10 ning to end was rather short. Hence the fi-nal ver-sion be-came
- [][]\OT1/cmtt/m/n/10 EvolutionaryLongPath.py[]\OT1/cmr/m/n/10 . 
+Underfull \hbox (badness 10000) in paragraph at lines 126--127
+
  []
 
 
@@ -461,53 +465,53 @@ Underfull \hbox (badness 10000) in paragraph at lines 128--129
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 130--131
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 134--135
+Underfull \hbox (badness 10000) in paragraph at lines 132--133
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 140--141
+Underfull \hbox (badness 10000) in paragraph at lines 134--135
 
  []
 
-<evolutional.jpg, id=79, 296.307pt x 408.92775pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 136--137
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 138--139
+
+ []
+
+<evolutional.jpg, id=82, 296.307pt x 408.92775pt>
 File: evolutional.jpg Graphic file (type jpg)
 <use evolutional.jpg>
-Package pdftex.def Info: evolutional.jpg  used on input line 148.
+Package pdftex.def Info: evolutional.jpg  used on input line 144.
 (pdftex.def)             Requested size: 164.93158pt x 227.62204pt.
-[5 <./evolutional.jpg>] (Report.aux)
-
-Package rerunfilecheck Warning: File `Report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Report.out':
-(rerunfilecheck)             Before: D580F90552F1B580BFC6BD4D15F07FF7;817
-(rerunfilecheck)             After:  FB528EADD58B431468ED32E9DFFDB198;900.
+[5] [6 <./evolutional.jpg>] (Report.aux)
+Package rerunfilecheck Info: File `Report.out' has not changed.
+(rerunfilecheck)             Checksum: FB528EADD58B431468ED32E9DFFDB198;900.
  ) 
 Here is how much of TeX's memory you used:
- 7510 strings out of 479697
- 110565 string characters out of 2867132
- 427584 words of memory out of 3000000
- 24291 multiletter control sequences out of 15000+200000
+ 7512 strings out of 479697
+ 110587 string characters out of 2867132
+ 427629 words of memory out of 3000000
+ 24292 multiletter control sequences out of 15000+200000
  410213 words of font info for 54 fonts, out of 3000000 for 9000
  1302 hyphenation exceptions out of 8191
- 79i,5n,85p,1016b,359s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 79i,5n,85p,1036b,359s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/weeti/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmbx10.pfb><C:/Users/weeti/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmbx12.pfb><C:/Users/weeti/AppData/Local/Programs/MiKTeX/fonts/type1/p
 ublic/amsfonts/cm/cmcsc10.pfb><C:/Users/weeti/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/weeti/AppData/Local/Programs/Mi
-KTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/weeti/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on Report.pdf (5 pages, 275568 bytes).
+ts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/weeti/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/weeti/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/weeti/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on Report.pdf (6 pages, 287663 bytes).
 PDF statistics:
- 111 PDF objects out of 1000 (max. 8388607)
- 22 named destinations out of 1000 (max. 500000)
- 112 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 122 PDF objects out of 1000 (max. 8388607)
+ 23 named destinations out of 1000 (max. 500000)
+ 120 words of extra memory for PDF output out of 10000 (max. 10000000)
 

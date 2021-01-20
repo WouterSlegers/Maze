@@ -6,7 +6,7 @@ class Maze:
         self.fields = fields
         self.connections = np.full((self.fields, self.fields, 2), False)
 
-        self.size = 1 + (self.fields - 1)*2
+        self.size = 1 + (self.fields - 1) * 2
         self.board = []
 
         outer_row = ['=']
@@ -37,7 +37,7 @@ class Maze:
             for y in range(self.fields):
                 for i in range(2):
                     if self.connections[x][y][i] != other_maze.connections[x][y][i]:
-                        if not (x == self.fields and i == 0) and not (y == self.fields and i == 1):
+                        if not (x == (self.fields - 1) and i == 0) and not (y == (self.fields - 1) and i == 1):
                             return False
         return True
 
@@ -45,6 +45,36 @@ class Maze:
         new_maze = Maze(self.fields)
         new_maze.connections = np.copy(self.connections)
         return new_maze
+
+    def update_walls(self):
+        """
+        Updates all the walls in self.board according to self.connections
+        """
+        for index_x, row in enumerate(self.board):
+            for index_y, col in enumerate(row):
+                if index_x != 0 and index_x < len(self.board) - 1 and index_y != 0 and index_y < len(self.board) - 1:
+                    if index_y % 2 == 0 and index_x % 2 == 0:
+                        self.board[index_y][index_x] = '+'
+                    elif index_y % 2 == 0:
+                        x = (index_x - 1)//2 #xy for field above
+                        y = (index_y - 1)//2
+                        if self.connections[x][y][1] == False:
+                            if index_y % 2 == 0:
+                                self.board[index_y][index_x] = '-'
+                            else:
+                                self.board[index_y][index_x] = '|'
+                        else:
+                            self.board[index_y][index_x] = ' '
+                    elif index_x % 2 == 0:
+                        x = (index_x - 1)//2 #xy for field to the left
+                        y = (index_y - 1)//2
+                        if self.connections[x][y][0] == False:
+                            if index_y % 2 == 0:
+                                self.board[index_y][index_x] = '-'
+                            else:
+                                self.board[index_y][index_x] = '|'
+                        else:
+                            self.board[index_y][index_x] = ' '
 
     def print(self, field_status):
         alt = 0
@@ -66,16 +96,12 @@ class Maze:
                 print(form.format(*row))
         print("")
 
-    def insert(self, input, xco, yco):
-        if self.board[yco][xco] != '=':
-            self.board[yco][xco] = input
-
     def field_on_board(self, x, y):
         return (x >= 0 and x <= self.fields - 1 and
                     y >= 0 and y <= self.fields - 1)
 
     def field_to_board_coords(self, x, y):
-        return (1 + 2*x, 1 + 2*y)
+        return (1 + 2 * x, 1 + 2 * y)
 
     def set_field(self, x, y, char):
         x, y = self.field_to_board_coords(x, y)
@@ -181,33 +207,3 @@ class Maze:
             self.connections[x][new_y][1] = True
         elif y < new_y:
             self.connections[x][y][1] = True
-
-    def update_walls(self):
-        """
-        Updates all the walls in self.board according to self.connections
-        """
-        for index_x, row in enumerate(self.board):
-            for index_y, col in enumerate(row):
-                if index_x != 0 and index_x < len(self.board) - 1 and index_y != 0 and index_y < len(self.board) - 1:
-                    if index_y % 2 == 0 and index_x % 2 == 0:
-                        self.board[index_y][index_x] = '+'
-                    elif index_y % 2 == 0:
-                        x = (index_x - 1)//2 #xy for field above
-                        y = (index_y - 1)//2
-                        if self.connections[x][y][1] == False:
-                            if index_y % 2 == 0:
-                                self.board[index_y][index_x] = '-'
-                            else:
-                                self.board[index_y][index_x] = '|'
-                        else:
-                            self.board[index_y][index_x] = ' '
-                    elif index_x % 2 == 0:
-                        x = (index_x - 1)//2 #xy for field to the left
-                        y = (index_y - 1)//2
-                        if self.connections[x][y][0] == False:
-                            if index_y % 2 == 0:
-                                self.board[index_y][index_x] = '-'
-                            else:
-                                self.board[index_y][index_x] = '|'
-                        else:
-                            self.board[index_y][index_x] = ' '

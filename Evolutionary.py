@@ -12,7 +12,7 @@ PRINT_INTERVAL = 5
 # Evolutional parameters
 GENERATIONS = 30
 STARTING_AMOUNT = 80               #starting amount of randomized mazes
-BEGINNING_DENSITY = 0.7
+BEGIN_DENSITY = 0.7
 NUMBER_TO_NEXT_GENERATION = 12      #number of the best performing mazes taken to the next generation
 NUMBER_OF_CHILDREN = 10             #each maze taken to the new generation makes this amount of mutated children
 MIN_MUTATIONS = 1                  #each child gets between MIN_MUTATIONS and MAX_MUTATIONS amount of mutations compared to the parent
@@ -98,6 +98,7 @@ def create_maze_evolutionary(size, begin_density):
 
 #-------------------------------------------------------------------------------
 if __name__ == "__main__":
-    maze = create_maze_evolutionary(SIZE_MAZE, BEGINNING_DENSITY)
+    maze = create_maze_evolutionary(SIZE_MAZE, BEGIN_DENSITY)
     print("The resulting maze:\n")
     maze.print(False)
+    # input("Press any button to quit.")

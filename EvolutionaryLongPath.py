@@ -12,17 +12,20 @@ PRINTING_GENERATIONS = True
 PRINT_INTERVAL = 10
 
 # Evolutional parameters
-GENERATIONS = 60
+GENERATIONS = 300
 STARTING_AMOUNT = 120               #starting amount of randomized mazes
-BEGINNING_DENSITY = 0.7             #density of the randomly initialized mazes
+BEGIN_DENSITY = 0.7                 #density of the randomly initialized mazes
 
 NUMBER_TO_NEXT_GENERATION = 12      #number of the best performing mazes taken to the next generation
-MUTATED_CHILDREN = 4                #each maze taken to the new generation makes this amount of (ordinary) mutated children
+MUTATED_CHILDREN = 3                #each maze taken to the new generation makes this amount of (ordinary) mutated children
 MIN_MUTATIONS = 1                   #each child gets between MIN_MUTATIONS and MAX_MUTATIONS amount of mutations compared to the parent
 MAX_MUTATIONS = 8
 REGIONALLY_MUTATED_CHILDREN = 6     #each maze taken to the new generation makes this amount of regionally mutated children
 MIN_MUTATIONS_REGIONAL = 2
 MAX_MUTATIONS_REGIONAL = 6
+
+#Keep in mind that each generation has NUMBER_TO_NEXT_GENERATION * (1 + MUTATED_CHILDREN + REGIONALLY_MUTATED_CHILDREN) mazes,
+#increasing any of these will increase computation times
 
 
 # Weights for the scoring function
@@ -32,13 +35,13 @@ WEIGHT_DISTANCE_PATH = 1.5          #increases the score for having a longer sho
 WEIGHT_WALLS = 0.1                  #each wall of the maze adds this score
 
 
-def shortest_path(maze, distance_to_fields, x, y, length):
+def shortest_path_to_field(maze, distance_to_fields, x, y, length):
     distance_to_fields[x][y] = length
     connected_neighbours = maze.get_connected_neighbours(x, y, True)
 
     for neighbour in connected_neighbours:
         if distance_to_fields[neighbour[0]][neighbour[1]] > length + 1:
-            shortest_path(maze, distance_to_fields, *neighbour, length + 1)
+            shortest_path_to_field(maze, distance_to_fields, *neighbour, length + 1)
 
 
 def score_function(maze, distance_to_fields):
@@ -46,6 +49,12 @@ def score_function(maze, distance_to_fields):
 
     for x in range(maze.fields):
         for y in range(maze.fields):
+            #Increasing score slightly for having more walls
+            for i in range(2):
+                if maze.connections[x][y][i] == False:
+                    sum += WEIGHT_WALLS
+
+            #Decreasing score for nodes that can not be reached
             distance_to_node = distance_to_fields[x][y]
             if distance_to_node == maze.fields**2 + 1:
                 sum -= WEIGHT_UNREACHED
@@ -64,17 +73,11 @@ def score_function(maze, distance_to_fields):
     else:
         sum += distance_to_end * WEIGHT_DISTANCE_PATH
 
-    for x in range(maze.fields):
-        for y in range(maze.fields):
-            for i in range(2):
-                if maze.connections[x][y][i] == False:
-                    sum += WEIGHT_WALLS
-
     return sum
 
 def evaluate_maze(maze):
     distance_to_fields = np.full((maze.fields, maze.fields), maze.fields**2 + 1)
-    shortest_path(maze, distance_to_fields, 0, 0, 0)
+    shortest_path_to_field(maze, distance_to_fields, 0, 0, 0)
     return (maze, score_function(maze, distance_to_fields))
 
 def create_maze_evolutionary(size, begin_density):
@@ -113,26 +116,27 @@ def create_maze_evolutionary(size, begin_density):
                     new_maze = high_scoring_maze.return_regionally_mutated(MIN_MUTATIONS_REGIONAL, MAX_MUTATIONS_REGIONAL)
                     instances.append(new_maze)
 
-
+    #best maze of last generation:
     maze = scored_instances[0][0]
 
     if PRINTING_GENERATIONS:
-        print("The evolutionary algorithm produced:")
+        print(f"After {GENERATIONS} generations of each {len(scored_instances)} mazes, " +
+            f"the evolutionary algorithm produced the following {maze.fields} by {maze.fields} maze:")
         maze.print(False)
-        print("Now let's make sure it is fully connected...")
 
     #runs path-through-maze on the resulting maze to ensure it is fully connected before returning the maze
     maze_copy = maze.return_copy()
     ptm.PRINTING_STEPS = False
     steps = ptm.path_through_maze(maze, (0, 0))
     if maze == maze_copy:
-        print("The evolutionary algorithm created a fully connected maze!")
+        print("The evolutionary algorithm already created a fully connected maze, no alterations were needed!")
     else:
-        print(f"The resulting maze was not yet fully connected, we had to open up {steps} walls")
+        print(f"The maze that the evolutionary algorithm produced was not yet fully connected, we had to open up {steps} walls")
     return maze
 
 #-------------------------------------------------------------------------------
 if __name__ == "__main__":
-    maze = create_maze_evolutionary(SIZE_MAZE, BEGINNING_DENSITY)
+    maze = create_maze_evolutionary(SIZE_MAZE, BEGIN_DENSITY)
     print("The resulting maze:\n")
     maze.print(False)
+    input("Press any button to quit.")
