@@ -22,7 +22,6 @@ def create_maze_ptrm(size, begin_density):
     return maze
 
 def search_path_maze(maze, field):
-
     to_search.append(field)
     while len(to_search) > 0:
         x, y = to_search.pop(0)
@@ -40,6 +39,8 @@ def search_path_maze(maze, field):
         else:
             maze.set_field(x, y, 's')
 
+#This is the recursive function searching for a path to the end of the maze,
+# and opening up walls until finds it.
 def path_through_maze(maze, starting_point):
     if PRINTING_STEPS:
         print("Searching from ", starting_point, " in the following maze")
